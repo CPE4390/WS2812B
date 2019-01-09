@@ -1,20 +1,22 @@
-/* 
- * File:   WS2812B.h
- * Author: bmcgarvey
- *
- * Created on January 9, 2019, 11:23 AM
- */
 
 #ifndef WS2812B_H
 #define	WS2812B_H
+
+//Defines
 
 #ifdef	__cplusplus
 extern "C" {
 #endif
 
-    void InitWS2812(void);
+    typedef struct {
+        unsigned char R;
+        unsigned char G;
+        unsigned char B;
+    } RGB;
     
-
+    void InitWS2812(void);
+    void SetColor(RGB color, int numLED);
+    void SetColors(RGB *colors, int numLED);
 
 #ifdef	__cplusplus
 }
