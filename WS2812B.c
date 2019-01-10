@@ -10,59 +10,50 @@ void InitWS2812(void) {
     SSP2CON1bits.CKP = 0; //SPI mode 0,0
     SSP2CON1bits.SSPM = 0b0000; //SPI Master - FOSC/4 = 8 MHz
     SSP2CON1bits.SSPEN = 1; //Enable MSSP
+    PIR3bits.SSP2IF = 0;
 }
 
 void SetColor(RGB color, int numLED) {
-    unsigned char buff[24];
     char b;
-    char temp;
     for (char led = 0; led < numLED; ++led) {
-        char pos = 0;
         unsigned char value = color.G;
         b = 8;
         while (b > 0) {
+            PIR3bits.SSP2IF = 0;
             if (value & 0b10000000) {
-                buff[pos] = 0b11111000;
+                SSP2BUF = 0b11111000;
             } else {
-                buff[pos] = 0b11000000;
+                SSP2BUF = 0b11000000;
             }
             --b;
-            ++pos;
             value <<= 1;
+            while (!PIR3bits.SSP2IF);
         }
         value = color.R;
         b = 8;
         while (b > 0) {
+            PIR3bits.SSP2IF = 0;
             if (value & 0b10000000) {
-                buff[pos] = 0b11111000;
+                SSP2BUF = 0b11111000;
             } else {
-                buff[pos] = 0b11000000;
+                SSP2BUF = 0b11000000;
             }
             --b;
-            ++pos;
             value <<= 1;
+            while (!PIR3bits.SSP2IF);
         }
         value = color.B;
         b = 8;
         while (b > 0) {
+            PIR3bits.SSP2IF = 0;
             if (value & 0b10000000) {
-                buff[pos] = 0b11111000;
+                SSP2BUF = 0b11111000;
             } else {
-                buff[pos] = 0b11000000;
+                SSP2BUF = 0b11000000;
             }
             --b;
-            ++pos;
             value <<= 1;
-        }
-
-        PIR3bits.SSP2IF = 0;
-        pos = 0;
-        while (pos < 24) {
-            SSP2BUF = buff[pos];
-            ++pos;
             while (!PIR3bits.SSP2IF);
-            PIR3bits.SSP2IF = 0;
-            temp = SSP2BUF;
         }
     }
     __delay_us(50);

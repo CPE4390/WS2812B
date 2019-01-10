@@ -16,7 +16,10 @@ void main(void) {
     LCDClear();
     LCDWriteLine("Starting", 0);
     InitWS2812();
-    RGB color = {0x07, 0x02, 0x03};
+    RGB color;
+    color.R = 0x07;
+    color.G = 0x02;
+    color.B = 0x03;
     while (1) {
         SetColor(color, 3);
         __delay_ms(200);
