@@ -8,10 +8,13 @@
 extern "C" {
 #endif
 
-    typedef struct {
+    typedef union {
+        struct {
         unsigned char R;
         unsigned char G;
         unsigned char B;
+        };
+        unsigned char bytes[3];
     } RGB;
     
     void InitWS2812(void);
