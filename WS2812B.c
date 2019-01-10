@@ -6,7 +6,9 @@ void InitWS2812(void) {
     TRISDbits.TRISD4 = 0;
     TRISDbits.TRISD5 = 1;
     TRISDbits.TRISD6 = 0;
+    WDTCONbits.ADSHR = 1;
     ODCON3bits.SPI2OD = 1;
+    WDTCONbits.ADSHR = 0;
     SSP2STATbits.CKE = 1;
     SSP2CON1bits.CKP = 0; //SPI mode 0,0
     SSP2CON1bits.SSPM = 0b0000; //SPI Master - FOSC/4 = 8 MHz
