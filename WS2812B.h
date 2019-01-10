@@ -20,6 +20,8 @@ extern "C" {
     void InitWS2812(void);
     void SetColor(RGB color, int numLED);
     void SetColors(RGB *colors, int numLED);
+    
+    #define _XTAL_FREQ  32000000
 
 #ifdef	__cplusplus
 }
