@@ -2,6 +2,7 @@
 #include <xc.h>
 #include "../WS2812B.h"
 #include "LCD.h"
+#include "stdio.h"
 
 
 //CONFIG bits for PIC18F87J11
@@ -12,16 +13,23 @@
 
 void main(void) {
     OSCTUNEbits.PLLEN = 1;
+    char lcd[17];
     LCDInit();
     LCDClear();
     LCDWriteLine("Starting", 0);
     InitWS2812();
     RGB color;
-    color.R = 0x07;
-    color.G = 0x02;
-    color.B = 0x03;
+    color.R = 0xff;
+    color.G = 0x00;
+    color.B = 0x00;
+    int i = 1;
     while (1) {
-        SetColor(color, 3);
-        __delay_ms(200);
+        sprintf(lcd, "%d", i);
+        LCDWriteLine(lcd, 1);
+        SetColor(color, i);
+        __delay_ms(1000);
+        if (i < 60) {
+            ++i;
+        }
     }
 }
