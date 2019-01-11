@@ -10,7 +10,6 @@
 #pragma config WDTEN=OFF
 #pragma config XINST=OFF
 
-
 void main(void) {
     OSCTUNEbits.PLLEN = 1;
     char lcd[17];
@@ -22,14 +21,17 @@ void main(void) {
     color.R = 0xff;
     color.G = 0x00;
     color.B = 0x00;
-    int i = 1;
+    RGB colors[LEDS];
+    for (int i = 0; i < LEDS; ++i) {
+        colors[i].R = 4 * i;
+        colors[i].B = 255 - 4 * i;
+        colors[i].G = 0;
+    }
+
     while (1) {
-        sprintf(lcd, "%d", i);
-        LCDWriteLine(lcd, 1);
-        SetColor(color, i);
+        SetColor(color);
         __delay_ms(1000);
-        if (i < 60) {
-            ++i;
-        }
+        SetColors(colors);
+        __delay_ms(1000);
     }
 }

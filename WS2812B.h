@@ -17,11 +17,13 @@ extern "C" {
         unsigned char bytes[3];
     } RGB;
     
-    void InitWS2812(void);
-    void SetColor(RGB color, int numLED);
-    void SetColors(RGB *colors, int numLED);
+#define LEDS  60
     
-    #define _XTAL_FREQ  32000000
+    void InitWS2812(void);
+    void SetColor(RGB color);
+    void SetColors(RGB *colors);
+    
+    #define _XTAL_FREQ  32000000L
 
 #ifdef	__cplusplus
 }
