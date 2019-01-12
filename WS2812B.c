@@ -6,6 +6,8 @@ void InitWS2812(void) {
     TRISDbits.TRISD4 = 0;
     TRISDbits.TRISD5 = 1;
     TRISDbits.TRISD6 = 0;
+    //Uncomment lines below if using a pullup resistor on data line
+    //Doesn't seem to be necessary
     //WDTCONbits.ADSHR = 1;
     //ODCON3bits.SPI2OD = 1;
     //WDTCONbits.ADSHR = 0;

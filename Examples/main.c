@@ -23,9 +23,23 @@ void main(void) {
     color.B = 0x00;
     RGB colors[LEDS];
     for (int i = 0; i < LEDS; ++i) {
-        colors[i].R = 4 * i;
-        colors[i].B = 255 - 4 * i;
-        colors[i].G = 0;
+        if (i % 4 == 0) {
+            colors[i].R = 255;
+            colors[i].B = 0;
+            colors[i].G = 0;
+        } else if (i % 4 == 1) {
+            colors[i].R = 0;
+            colors[i].B = 0;
+            colors[i].G = 255;
+        } else if (i % 4 == 2) {
+            colors[i].R = 0;
+            colors[i].B = 255;
+            colors[i].G = 0;
+        } else {
+            colors[i].R = 255;
+            colors[i].B = 255;
+            colors[i].G = 255;
+        }
     }
 
     while (1) {
