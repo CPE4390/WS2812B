@@ -2,6 +2,7 @@
 #include "WS2812B.h"
 
 void InitWS2812(void) {
+    //Data line for LED is RD4
     LATDbits.LATD4 = 0;
     TRISDbits.TRISD4 = 0;
     TRISDbits.TRISD5 = 1;

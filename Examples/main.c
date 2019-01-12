@@ -18,9 +18,9 @@ void main(void) {
     LCDWriteLine("Starting", 0);
     InitWS2812();
     RGB color;
-    color.R = 0xff;
-    color.G = 0x00;
-    color.B = 0x00;
+    color.R = 255;
+    color.G = 0;
+    color.B = 0;
     RGB colors[LEDS];
     for (int i = 0; i < LEDS; ++i) {
         if (i % 4 == 0) {
